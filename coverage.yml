@@ -1,0 +1,23 @@
+name: Code Coverage
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run the tests
+      run: npm test -- --coverage
